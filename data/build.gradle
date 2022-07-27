@@ -12,12 +12,22 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
+        pre {
+            minifyEnabled false
+            buildConfigField("String","API_KEY","\"03bb79ffc5f02332b66c445e889dd6ca\"")
+            buildConfigField("String","API_URL","\"https://gateway.marvel.com:443/\"")
+            buildConfigField("String","API_HASH","\"393c6a49994fc0ad745b79b8ccc51ee2\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String","API_KEY","\"03bb79ffc5f02332b66c445e889dd6ca\"")
+            buildConfigField("String","API_URL","\"https://gateway.marvel.com:443/\"")
+            buildConfigField("String","API_HASH","\"393c6a49994fc0ad745b79b8ccc51ee2\"")
         }
     }
     compileOptions {
@@ -39,11 +49,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.14.7'
+    implementation 'com.squareup.okhttp3:okhttp:4.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.3'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.0.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 
     implementation project(':domain')
 

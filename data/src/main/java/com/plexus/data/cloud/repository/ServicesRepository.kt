@@ -5,6 +5,7 @@ import com.plexus.data.cloud.ApiServices
 import com.plexus.data.cloud.ServicesConstants
 import com.plexus.data.cloud.model.BaseResponse
 import com.plexus.domain.Character
+import com.plexus.domain.CharactersResponse
 import io.reactivex.Flowable
 
 class ServicesRepository(context: Context) {
@@ -14,5 +15,6 @@ class ServicesRepository(context: Context) {
        api =  ApiServices.RetrofitBuilder().create(context)
     }
 
-    fun getAllCharacters(versionApi: String = ServicesConstants.VERSION_API_V1): Flowable<BaseResponse<ArrayList<Character>>>? = api?.getCharacters(versionApi)
+    fun getAllCharacters(versionApi: String = ServicesConstants.VERSION_API_V1): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacters(versionApi)
+    fun getCharacterDetail(versionApi: String = ServicesConstants.VERSION_API_V1,id: Int): Flowable<BaseResponse<Character>>? = api?.getCharacterDetail(versionApi,id)
 }

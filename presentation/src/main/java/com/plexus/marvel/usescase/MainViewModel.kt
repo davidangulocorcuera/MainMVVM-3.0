@@ -20,7 +20,22 @@ class MainViewModel(app: Application) : BaseViewModel(app) {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        Log.v("personajes",it.data?.size.toString())
+                        getCharacterDetail(it.data?.results!![0].id)
+                    },
+                    onError = {
+                        Log.v("personajes","error")
+                    }
+                )
+            )
+        }
+    }
+    fun getCharacterDetail(id: Int) {
+        ServicesRepository(getApplication()).getCharacterDetail(id = id)?.apply {
+            mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = {
+
+
                     },
                     onError = {
                         Log.v("personajes","error")
