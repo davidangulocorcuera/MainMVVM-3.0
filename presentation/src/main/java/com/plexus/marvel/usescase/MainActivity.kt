@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.plexus.marvel.R
 import com.plexus.marvel.base.BaseActivity
 import com.plexus.marvel.databinding.ActivityMainBinding
+import com.plexus.marvel.usescase.splash.SplashFragment
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
     MainViewModel::class.java
@@ -18,6 +19,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getAllCharacters()
+        navigator.navigate(SplashFragment(), addBackStack = false)
     }
 }

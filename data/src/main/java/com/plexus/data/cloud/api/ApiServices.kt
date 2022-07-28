@@ -1,7 +1,8 @@
-package com.plexus.data.cloud
+package com.plexus.data.cloud.api
 
 import android.content.Context
 import com.plexus.data.BuildConfig.*
+import com.plexus.data.cloud.ServicesConstants
 import com.plexus.data.cloud.interceptors.RetrofitClient
 import com.plexus.data.cloud.model.BaseResponse
 import com.plexus.domain.Character

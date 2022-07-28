@@ -19,6 +19,17 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     lateinit var viewModel: VM
     open lateinit var mBinding: DB
 
+    private val baseActivity: BaseActivity<*, *>
+        get() {
+            return activity as BaseActivity<*, *>
+        }
+
+    val navigator: Navigator
+        get() {
+            return baseActivity.navigator
+        }
+
+
     val LOG_TAG = this::class.java.simpleName
 
 
@@ -54,6 +65,10 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         container?.apply { init(inflater, container) }
         super.onCreateView(inflater, container, savedInstanceState)
         return mBinding.root
+    }
+
+    fun showErrorSnackBar(text: String) {
+        baseActivity.showErrorSnackBar(text)
     }
 
 }

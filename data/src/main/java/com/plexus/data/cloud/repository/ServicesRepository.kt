@@ -1,7 +1,7 @@
 package com.plexus.data.cloud.repository
 
 import android.content.Context
-import com.plexus.data.cloud.ApiServices
+import com.plexus.data.cloud.api.ApiServices
 import com.plexus.data.cloud.ServicesConstants
 import com.plexus.data.cloud.model.BaseResponse
 import com.plexus.domain.Character

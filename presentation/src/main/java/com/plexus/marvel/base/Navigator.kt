@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
+import com.plexus.marvel.R
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -33,7 +34,7 @@ class Navigator(private val activity: BaseActivity<*, *>) {
 
         if (addBackStack) transaction.addToBackStack(fragmentToGo.LOG_TAG)
 
-        //transaction.replace(container, fragmentToGo, fragmentToGo.LOG_TAG)
+        transaction.replace(R.id.fragmentContainerMain, fragmentToGo, fragmentToGo.LOG_TAG)
 
         if (arguments != null) fragmentToGo.arguments = arguments
 

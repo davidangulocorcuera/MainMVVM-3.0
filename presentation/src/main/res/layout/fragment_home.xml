@@ -9,22 +9,22 @@
 
         <variable
             name="viewModel"
-            type="com.plexus.marvel.usescase.MainViewModel" />
+            type="com.plexus.marvel.usescase.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.modules.usescase.main.MainActivity">
-
-        <FrameLayout
-            android:id="@+id/fragmentContainerMain"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
+       >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_to_characters_list"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> viewModel.goToCharacters.invoke()}"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
