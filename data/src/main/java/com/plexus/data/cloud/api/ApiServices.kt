@@ -20,8 +20,8 @@ interface ApiServices {
     @GET("{version}/" + ServicesConstants.PUBLIC + "/" + ServicesConstants.CHARACTERS)
     fun getCharacters(
         @Path("version") version: String,
-        @Query("limit") limit: Int? = 20,
         @Query("offset") offset: Int? = 0,
+        @Query("limit") limit: Int? = 20,
         @Query("ts") ts: Int? = 1,
         @Query("hash") hash: String? = API_HASH,
         @Query("apikey") apikey: String? = API_KEY,

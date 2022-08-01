@@ -15,6 +15,6 @@ class ServicesRepository(context: Context) {
        api =  ApiServices.RetrofitBuilder().create(context)
     }
 
-    fun getAllCharacters(versionApi: String = ServicesConstants.VERSION_API_V1): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacters(versionApi)
+    fun getAllCharacters(versionApi: String = ServicesConstants.VERSION_API_V1,offset: Int = 0): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacters(versionApi,offset)
     fun getCharacterDetail(versionApi: String = ServicesConstants.VERSION_API_V1,id: Int): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacterDetail(versionApi,id)
 }

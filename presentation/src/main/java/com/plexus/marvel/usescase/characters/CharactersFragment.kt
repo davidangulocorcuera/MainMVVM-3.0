@@ -3,6 +3,7 @@ package com.plexus.marvel.usescase.characters
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.plexus.data.storage.database.LocalRepository
 import com.plexus.domain.Character
 import com.plexus.marvel.R
@@ -19,6 +20,7 @@ class CharactersFragment :
 
     private lateinit var adapter: CharactersAdapter
     private var characters = arrayListOf<Character>()
+    private var offset = 1
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_characters
@@ -28,10 +30,9 @@ class CharactersFragment :
         mBinding.viewModel = viewModel
         mBinding.action = this
         mBinding.lifecycleOwner = this
-        if (characters.isEmpty()) getFromDatabase()
         initActions()
         initList()
-
+        if (characters.isEmpty()) getFromDatabase()
     }
 
     private fun getFromDatabase() {
@@ -40,7 +41,7 @@ class CharactersFragment :
                 LocalRepository().getAllCharacters(App().getDatabase(requireContext()))
             )
             withContext(Dispatchers.Main) {
-                mBinding.executePendingBindings()
+                adapter.notifyDataSetChanged()
             }
         }
     }
@@ -59,6 +60,7 @@ class CharactersFragment :
             GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         mBinding.rvCharacters.layoutManager = layoutManager
         mBinding.rvCharacters.adapter = adapter
+        setRecyclerListener()
     }
 
     private fun goToCharacterDetail(id: Int) {
@@ -73,7 +75,17 @@ class CharactersFragment :
     }
 
     private fun onCharactersLoaded(characters: ArrayList<Character>) {
+        offset++
         this.characters.addAll(characters)
         adapter.notifyDataSetChanged()
+    }
+
+    private fun setRecyclerListener() {
+        mBinding.rvCharacters.addOnScrollListener(object : PaginationListener(mBinding.rvCharacters.layoutManager as GridLayoutManager) {
+            override fun loadMoreItems() {
+                viewModel.getAllCharacters(offset)
+            }
+            override fun isLoading(): Boolean = viewModel.loading.value == true
+        })
     }
 }

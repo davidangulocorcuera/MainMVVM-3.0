@@ -22,10 +22,10 @@ class CharactersViewModel(app: Application) : BaseViewModel(app) {
     var loading = MutableLiveData<Boolean>()
     var showErrorButton = MutableLiveData<Boolean>(false)
 
-    fun getAllCharacters() {
+    fun getAllCharacters(offset: Int) {
         showErrorButton.value = false
         loading.value = true
-        ServicesRepository(getApplication()).getAllCharacters()?.apply {
+        ServicesRepository(getApplication()).getAllCharacters(offset = offset)?.apply {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
