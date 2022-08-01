@@ -6,7 +6,11 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerAdapter<E, VH : BaseRecyclerAdapter.ViewHolder?,DB : ViewDataBinding> :
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
+abstract class BaseRecyclerAdapter<E, VH : BaseRecyclerAdapter.ViewHolder?, DB : ViewDataBinding> :
     RecyclerView.Adapter<VH> {
     var LOG_TAG = ""
     var list: List<E>

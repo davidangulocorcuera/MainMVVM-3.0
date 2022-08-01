@@ -6,6 +6,10 @@ import com.plexus.marvel.base.BaseActivity
 import com.plexus.marvel.databinding.ActivityMainBinding
 import com.plexus.marvel.usescase.splash.SplashFragment
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
     MainViewModel::class.java
 ) {

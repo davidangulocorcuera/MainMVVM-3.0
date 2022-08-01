@@ -4,9 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-
 /**
- * © Class created by David Angulo
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
 open class BaseViewModel(app: Application) : AndroidViewModel(app)

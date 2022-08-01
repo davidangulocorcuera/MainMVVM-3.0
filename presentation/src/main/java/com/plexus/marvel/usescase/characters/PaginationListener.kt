@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * © Class created by David Angulo
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
 abstract class PaginationListener(

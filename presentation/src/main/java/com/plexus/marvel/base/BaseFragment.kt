@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 
 /**
- * © Class created by David Angulo
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    Fragment(),GlobalAction {
+    Fragment(), GlobalAction {
     lateinit var viewModel: VM
     open lateinit var mBinding: DB
 

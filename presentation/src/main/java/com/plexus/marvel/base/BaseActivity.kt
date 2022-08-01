@@ -11,8 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.plexus.marvel.R
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    AppCompatActivity(),GlobalAction {
+    AppCompatActivity(), GlobalAction {
 
     @LayoutRes
     abstract fun getLayoutRes(): Int
@@ -20,7 +24,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(private va
     val binding by lazy {
         DataBindingUtil.setContentView(this, getLayoutRes()) as DB
     }
-     val navigator: Navigator by lazy {
+    val navigator: Navigator by lazy {
         Navigator(this)
     }
 

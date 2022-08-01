@@ -13,6 +13,9 @@ import com.plexus.marvel.base.BaseRecyclerAdapter
 import com.plexus.marvel.databinding.ItemCharacterBinding
 import com.plexus.marvel.utils.getImageUrl
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
 
 class CharactersAdapter(
     var context: Context,

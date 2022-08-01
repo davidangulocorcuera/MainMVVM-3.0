@@ -4,6 +4,10 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 @Module
 class ApplicationModule(var app: App) {
     @Provides

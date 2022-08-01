@@ -3,6 +3,10 @@ package com.plexus.data.storage.database
 import com.plexus.data.storage.database.converters.CharacterDB
 import com.plexus.domain.Character
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class LocalRepository {
     fun saveAllCharacters(characters: ArrayList<Character>, db: AppDatabase) {
         characters.forEach {

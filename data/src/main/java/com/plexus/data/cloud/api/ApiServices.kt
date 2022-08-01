@@ -5,7 +5,6 @@ import com.plexus.data.BuildConfig.*
 import com.plexus.data.cloud.ServicesConstants
 import com.plexus.data.cloud.interceptors.RetrofitClient
 import com.plexus.data.cloud.model.BaseResponse
-import com.plexus.domain.Character
 import com.plexus.domain.CharactersResponse
 import io.reactivex.Flowable
 import retrofit2.Retrofit
@@ -14,6 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 
 interface ApiServices {
 
@@ -41,7 +45,7 @@ interface ApiServices {
         var retrofit: Retrofit? = null
         fun create(context: Context): ApiServices? {
             if (retrofit == null) {
-                RetrofitClient().getClient(context)?.let {
+                RetrofitClient().getClient()?.let {
                     retrofit = Retrofit.Builder()
                         .baseUrl(API_URL)
                         .client(it)

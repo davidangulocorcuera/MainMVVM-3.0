@@ -10,6 +10,10 @@ import com.plexus.marvel.databinding.FragmentCharacterDetailBinding
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import com.plexus.marvel.utils.getImageUrl
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class CharacterDetailFragment :
     BaseFragment<CharacterDetailViewModel, FragmentCharacterDetailBinding>(CharacterDetailViewModel::class.java) {
     override fun getLayoutRes(): Int {

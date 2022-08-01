@@ -10,6 +10,10 @@ import com.plexus.marvel.databinding.FragmentSplashBinding
 import com.plexus.marvel.usescase.home.HomeFragment
 import kotlinx.coroutines.*
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class SplashFragment :
     BaseFragment<SplashViewModel, FragmentSplashBinding>(SplashViewModel::class.java) {
     override fun getLayoutRes(): Int {

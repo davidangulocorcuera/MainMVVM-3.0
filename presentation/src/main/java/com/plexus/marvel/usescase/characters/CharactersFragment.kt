@@ -15,12 +15,16 @@ import com.plexus.marvel.usescase.home.HomeFragment
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import kotlinx.coroutines.*
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class CharactersFragment :
     BaseFragment<CharactersViewModel, FragmentCharactersBinding>(CharactersViewModel::class.java) {
 
     private lateinit var adapter: CharactersAdapter
     private var characters = arrayListOf<Character>()
-    private var offset = 1
+    private var offset = 0
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_characters
@@ -81,10 +85,13 @@ class CharactersFragment :
     }
 
     private fun setRecyclerListener() {
-        mBinding.rvCharacters.addOnScrollListener(object : PaginationListener(mBinding.rvCharacters.layoutManager as GridLayoutManager) {
+        mBinding.rvCharacters.addOnScrollListener(object :
+            PaginationListener(mBinding.rvCharacters.layoutManager as GridLayoutManager) {
             override fun loadMoreItems() {
+                offset += 20
                 viewModel.getAllCharacters(offset)
             }
+
             override fun isLoading(): Boolean = viewModel.loading.value == true
         })
     }

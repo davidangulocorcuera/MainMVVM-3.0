@@ -5,6 +5,10 @@ import android.content.Context
 import androidx.room.Room
 import com.plexus.data.storage.database.AppDatabase
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
 class App : Application() {
     private lateinit var database: AppDatabase
 

@@ -1,14 +1,10 @@
 package com.plexus.marvel.base
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.Fragment
 import com.plexus.marvel.R
-import kotlinx.coroutines.CoroutineScope
 
 /**
- * © Class created by David Angulo
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
 class Navigator(private val activity: BaseActivity<*, *>) {

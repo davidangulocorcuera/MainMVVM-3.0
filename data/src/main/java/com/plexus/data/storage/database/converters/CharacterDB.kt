@@ -5,6 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.plexus.domain.Image
 
+/**
+ * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * */
+
+
 @Entity(tableName = "characters")
 data class CharacterDB(
     @PrimaryKey @ColumnInfo(name = "id") var id: Int,
