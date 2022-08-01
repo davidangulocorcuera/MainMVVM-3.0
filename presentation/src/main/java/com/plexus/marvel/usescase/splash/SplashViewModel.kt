@@ -38,7 +38,6 @@ class SplashViewModel(app: Application) : BaseViewModel(app) {
                     },
                     onError = {
                         loading.value = false
-                        showErrorButton.value = true
                         onErrorLoadingCharacters.invoke()
                     }
                 )

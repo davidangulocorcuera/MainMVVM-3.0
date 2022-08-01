@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorRed">#EF5350</color>
     <color name="colorSuperLight">#FFFFFFFF</color>
+    <color name="colorDarkest">#000000</color>
+    <color name="colorRegular">#7C7C7C</color>
 </resources>

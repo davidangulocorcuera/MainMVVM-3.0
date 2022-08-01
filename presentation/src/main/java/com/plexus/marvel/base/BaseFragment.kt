@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
  * */
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    Fragment() {
+    Fragment(),GlobalAction {
     lateinit var viewModel: VM
     open lateinit var mBinding: DB
 

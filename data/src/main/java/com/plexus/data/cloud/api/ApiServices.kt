@@ -20,7 +20,7 @@ interface ApiServices {
     @GET("{version}/" + ServicesConstants.PUBLIC + "/" + ServicesConstants.CHARACTERS)
     fun getCharacters(
         @Path("version") version: String,
-        @Query("limit") limit: Int? = 10,
+        @Query("limit") limit: Int? = 20,
         @Query("offset") offset: Int? = 0,
         @Query("ts") ts: Int? = 1,
         @Query("hash") hash: String? = API_HASH,
@@ -35,7 +35,7 @@ interface ApiServices {
         @Query("ts") ts: Int? = 1,
         @Query("hash") hash: String? = API_HASH,
         @Query("apikey") apikey: String? = API_KEY,
-    ): Flowable<BaseResponse<Character>>
+    ): Flowable<BaseResponse<CharactersResponse>>
 
     class RetrofitBuilder {
         var retrofit: Retrofit? = null

@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.plexus.marvel.R
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    AppCompatActivity() {
+    AppCompatActivity(),GlobalAction {
 
     @LayoutRes
     abstract fun getLayoutRes(): Int

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space_small4">4dp</dimen>
+    <dimen name="space_small6">6dp</dimen>
+    <dimen name="space_small8">8dp</dimen>
+    <dimen name="space_medium11">11dp</dimen>
+    <dimen name="space_medium15">15dp</dimen>
+    <dimen name="space_medium20">20dp</dimen>
+    <dimen name="space_medium25">25dp</dimen>
+    <dimen name="space_medium30">30dp</dimen>
+    <dimen name="space_medium40">40dp</dimen>
+    <dimen name="space_big50">50dp</dimen>
+    <dimen name="space_big60">60dp</dimen>
+    <dimen name="space_big70">70dp</dimen>
+    <dimen name="space_big100">100dp</dimen>
+    <dimen name="space_big90">90dp</dimen>
+    <dimen name="space_big125">120dp</dimen>
+    <dimen name="space_big200">200dp</dimen>
+
+    <dimen name="defaultElevation">6dp</dimen>
+    <dimen name="buttonRadius">15dp</dimen>
+</resources>

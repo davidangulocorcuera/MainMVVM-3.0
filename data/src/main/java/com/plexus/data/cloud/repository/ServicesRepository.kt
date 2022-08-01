@@ -16,5 +16,5 @@ class ServicesRepository(context: Context) {
     }
 
     fun getAllCharacters(versionApi: String = ServicesConstants.VERSION_API_V1): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacters(versionApi)
-    fun getCharacterDetail(versionApi: String = ServicesConstants.VERSION_API_V1,id: Int): Flowable<BaseResponse<Character>>? = api?.getCharacterDetail(versionApi,id)
+    fun getCharacterDetail(versionApi: String = ServicesConstants.VERSION_API_V1,id: Int): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacterDetail(versionApi,id)
 }

@@ -11,7 +11,7 @@ class LocalRepository {
                     id = it.id,
                     name = it.name,
                     description = it.description,
-                    image = it.image
+                    thumbnail = it.thumbnail
                 )
             )
         }
@@ -25,7 +25,7 @@ class LocalRepository {
                     id = it.id,
                     name = it.name,
                     description = it.description,
-                    image = it.image
+                    thumbnail = it.thumbnail
                 )
             )
         }

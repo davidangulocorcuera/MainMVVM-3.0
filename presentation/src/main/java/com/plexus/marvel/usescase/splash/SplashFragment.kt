@@ -38,6 +38,7 @@ class SplashFragment :
     }
 
     private fun onErrorLoadingCharacters() {
+        viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }
 

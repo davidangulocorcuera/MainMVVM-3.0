@@ -30,7 +30,7 @@ abstract class BaseRecyclerAdapter<E, VH : BaseRecyclerAdapter.ViewHolder?,DB : 
         onBindViewHolder(holder, position, getItem(position))
     }
 
-    fun onBindViewHolder(holder: VH, position: Int, item: E) {
+    private fun onBindViewHolder(holder: VH, position: Int, item: E) {
         holder?.bind(position)
     }
 
