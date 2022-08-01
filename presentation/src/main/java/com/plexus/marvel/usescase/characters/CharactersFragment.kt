@@ -67,18 +67,18 @@ class CharactersFragment :
         setRecyclerListener()
     }
 
-    private fun goToCharacterDetail(id: Int) {
+    fun goToCharacterDetail(id: Int) {
         navigator.navigate(CharacterDetailFragment(), true, Bundle().apply {
             putInt(EXTRA_CHARACTER_ID, id)
         })
     }
 
-    private fun onErrorLoadingCharacters() {
+    fun onErrorLoadingCharacters() {
         viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }
 
-    private fun onCharactersLoaded(characters: ArrayList<Character>) {
+    fun onCharactersLoaded(characters: ArrayList<Character>) {
         offset++
         this.characters.addAll(characters)
         adapter.notifyDataSetChanged()

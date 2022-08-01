@@ -32,7 +32,7 @@ class SplashFragment :
         viewModel.onErrorLoadingCharacters = ::onErrorLoadingCharacters
     }
 
-    private fun onCharactersLoaded(characters: ArrayList<Character>) {
+    fun onCharactersLoaded(characters: ArrayList<Character>) {
         CoroutineScope(Job()).launch {
             LocalRepository().saveAllCharacters(characters, App().getDatabase(requireContext()))
             withContext(Dispatchers.Main) {
@@ -41,7 +41,7 @@ class SplashFragment :
         }
     }
 
-    private fun onErrorLoadingCharacters() {
+    fun onErrorLoadingCharacters() {
         viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }

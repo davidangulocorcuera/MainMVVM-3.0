@@ -29,7 +29,7 @@ class CharacterDetailViewModel(app: Application) : BaseViewModel(app) {
 
     fun getCharacterDetail(id: Int) {
         loading.value = true
-        ServicesRepository(getApplication()).getCharacterDetail(id = id)?.apply {
+        ServicesRepository().getCharacterDetail(id = id)?.apply {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {

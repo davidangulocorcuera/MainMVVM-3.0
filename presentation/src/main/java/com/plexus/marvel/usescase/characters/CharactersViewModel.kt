@@ -29,7 +29,7 @@ class CharactersViewModel(app: Application) : BaseViewModel(app) {
     fun getAllCharacters(offset: Int) {
         showErrorButton.value = false
         loading.value = true
-        ServicesRepository(getApplication()).getAllCharacters(offset = offset)?.apply {
+        ServicesRepository().getAllCharacters(offset = offset)?.apply {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {

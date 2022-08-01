@@ -21,7 +21,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(HomeViewMo
         viewModel.goToCharacters = ::goToCharacters
     }
 
-    private fun goToCharacters() {
+    fun goToCharacters() {
         navigator.navigate(CharactersFragment(), true)
     }
 

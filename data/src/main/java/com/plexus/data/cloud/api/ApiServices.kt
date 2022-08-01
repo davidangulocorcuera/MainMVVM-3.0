@@ -43,7 +43,7 @@ interface ApiServices {
 
     class RetrofitBuilder {
         var retrofit: Retrofit? = null
-        fun create(context: Context): ApiServices? {
+        fun create(): ApiServices? {
             if (retrofit == null) {
                 RetrofitClient().getClient()?.let {
                     retrofit = Retrofit.Builder()

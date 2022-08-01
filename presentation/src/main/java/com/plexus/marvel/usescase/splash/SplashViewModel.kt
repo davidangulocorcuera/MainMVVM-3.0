@@ -29,7 +29,7 @@ class SplashViewModel(app: Application) : BaseViewModel(app) {
     fun getAllCharacters() {
         showErrorButton.value = false
         loading.value = true
-        ServicesRepository(getApplication()).getAllCharacters()?.apply {
+        ServicesRepository().getAllCharacters()?.apply {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {

@@ -38,7 +38,7 @@ class CharacterDetailFragment :
         viewModel.onErrorLoadingCharacter = ::onErrorLoadingCharacter
     }
 
-    private fun onCharacterLoaded(character: Character) {
+    fun onCharacterLoaded(character: Character) {
         viewModel.character.value = character
         Glide.with(requireContext())
             .load(character.getImageUrl())
@@ -46,7 +46,7 @@ class CharacterDetailFragment :
             .into(mBinding.ivCharacter)
     }
 
-    private fun onErrorLoadingCharacter() {
+    fun onErrorLoadingCharacter() {
         viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }
