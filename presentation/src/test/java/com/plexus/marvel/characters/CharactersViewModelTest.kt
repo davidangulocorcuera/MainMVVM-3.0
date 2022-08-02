@@ -2,6 +2,8 @@ package com.plexus.marvel.characters
 
 import android.app.Application
 import androidx.fragment.app.testing.launchFragmentInContainer
+import com.plexus.domain.Character
+import com.plexus.domain.Image
 import com.plexus.marvel.usescase.characters.CharactersFragment
 import com.plexus.marvel.usescase.characters.CharactersViewModel
 import com.plexus.marvel.usescase.home.HomeFragment
@@ -36,7 +38,19 @@ class CharactersViewModelTest {
 
     @Test
     fun `characters loaded should invoke onCharactersLoaded`() {
-        Mockito.verify(viewModel.onCharactersLoaded).invoke(ArrayList())
+        Mockito.verify(viewModel.onCharactersLoaded).invoke(
+            arrayListOf(
+                Character(
+                    id = 1,
+                    name = "example",
+                    description = "example description",
+                    thumbnail = Image(
+                        path = "example path",
+                        extension = "jpg"
+                    )
+                )
+            )
+        )
     }
 
     @Test

@@ -55,5 +55,4 @@ class CharacterDetailViewModelTest {
         Mockito.verify(viewModel.onErrorLoadingCharacter).invoke()
     }
 
-
 }
