@@ -1,19 +1,11 @@
 package com.plexus.marvel.characters
 
-import android.app.Application
 import androidx.fragment.app.testing.launchFragmentInContainer
 import com.plexus.domain.Character
 import com.plexus.domain.Image
 import com.plexus.marvel.usescase.characters.CharactersFragment
 import com.plexus.marvel.usescase.characters.CharactersViewModel
-import com.plexus.marvel.usescase.home.HomeFragment
-import com.plexus.marvel.usescase.home.HomeViewModel
-import com.plexus.marvel.usescase.splash.SplashFragment
-import com.plexus.marvel.usescase.splash.SplashViewModel
-import dagger.android.AndroidInjection.inject
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
 import org.mockito.Mockito
 
@@ -21,7 +13,7 @@ import org.mockito.Mockito
 class CharactersViewModelTest {
 
     private val viewModel: CharactersViewModel by lazy {
-        CharactersViewModel(Application())
+        Mockito.mock(CharactersViewModel::class.java)
     }
 
     @Before
