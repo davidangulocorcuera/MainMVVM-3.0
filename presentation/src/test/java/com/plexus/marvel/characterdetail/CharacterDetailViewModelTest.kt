@@ -16,33 +16,4 @@ class CharacterDetailViewModelTest {
         Mockito.mock(CharacterDetailViewModel::class.java)
     }
 
-    @Before
-    fun setUp() {
-        val scenario = launchFragmentInContainer<CharacterDetailFragment>()
-        scenario.onFragment { fragment ->
-            fragment.apply {
-                viewModel.onCharacterLoaded = ::onCharacterLoaded
-                viewModel.onErrorLoadingCharacter = ::onErrorLoadingCharacter
-            }
-        }
-    }
-
-    @Test
-    fun `character detail loaded should invoke onCharactersLoaded`() {
-            Mockito.verify(viewModel.onCharacterLoaded).invoke(Character(
-                id= 1,
-                name = "example",
-                description = "example description",
-                thumbnail = Image(
-                    path = "example path",
-                    extension = "jpg"
-                )
-            ))
-    }
-
-    @Test
-    fun `loading character error should invoke onErrorLoadingCharacters`() {
-        Mockito.verify(viewModel.onErrorLoadingCharacter).invoke()
-    }
-
 }

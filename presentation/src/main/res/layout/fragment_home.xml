@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
        >
         <Button
+            android:id="@+id/btnSeeCharacters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/go_to_characters_list"
@@ -24,7 +25,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> viewModel.goToCharacters.invoke()}"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

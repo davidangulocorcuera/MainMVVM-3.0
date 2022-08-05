@@ -11,18 +11,19 @@ import com.plexus.marvel.usescase.characters.CharactersFragment
  * */
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(HomeViewModel::class.java) {
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_home
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_home
+
 
     override fun viewCreated(view: View?) {
         mBinding.viewModel = viewModel
         mBinding.lifecycleOwner = this
-        viewModel.goToCharacters = ::goToCharacters
+        setButtonListener()
     }
 
-    fun goToCharacters() {
-        navigator.navigate(CharactersFragment(), true)
+    private fun setButtonListener() {
+        mBinding.btnSeeCharacters.setOnClickListener {
+            navigator.navigate(CharactersFragment(), true)
+        }
     }
 
 }

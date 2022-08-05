@@ -7,6 +7,7 @@ import com.plexus.domain.Character
 import com.plexus.marvel.R
 import com.plexus.marvel.base.BaseFragment
 import com.plexus.marvel.databinding.FragmentCharacterDetailBinding
+import com.plexus.marvel.usescase.characters.CharactersState
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import com.plexus.marvel.utils.getImageUrl
 
@@ -24,7 +25,7 @@ class CharacterDetailFragment :
         mBinding.viewModel = viewModel
         mBinding.action = this
         mBinding.lifecycleOwner = this
-        initActions()
+        observeState()
         arguments?.getInt(EXTRA_CHARACTER_ID)?.apply {
             viewModel.getCharacterDetail(this)
         } ?: kotlin.run {
@@ -33,12 +34,17 @@ class CharacterDetailFragment :
 
     }
 
-    private fun initActions() {
-        viewModel.onCharacterLoaded = ::onCharacterLoaded
-        viewModel.onErrorLoadingCharacter = ::onErrorLoadingCharacter
+    private fun observeState() {
+        viewModel.characterState.observe(viewLifecycleOwner) {
+            when (it) {
+                is CharacterDetailState.CharacterLoadedState -> onCharacterLoaded(it.character)
+                is CharacterDetailState.ErrorLoadingCharacterState -> onErrorLoadingCharacter()
+            }
+        }
     }
 
-    fun onCharacterLoaded(character: Character) {
+
+    private fun onCharacterLoaded(character: Character) {
         viewModel.character.value = character
         Glide.with(requireContext())
             .load(character.getImageUrl())
@@ -46,7 +52,7 @@ class CharacterDetailFragment :
             .into(mBinding.ivCharacter)
     }
 
-    fun onErrorLoadingCharacter() {
+    private fun onErrorLoadingCharacter() {
         viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }

@@ -2,6 +2,7 @@ package com.plexus.marvel.usescase.characters
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.plexus.data.storage.database.LocalRepository
@@ -14,6 +15,8 @@ import com.plexus.marvel.usescase.characterdetail.CharacterDetailFragment
 import com.plexus.marvel.usescase.home.HomeFragment
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
@@ -34,7 +37,7 @@ class CharactersFragment :
         mBinding.viewModel = viewModel
         mBinding.action = this
         mBinding.lifecycleOwner = this
-        initActions()
+        observeState()
         initList()
         if (characters.isEmpty()) getFromDatabase()
     }
@@ -50,13 +53,20 @@ class CharactersFragment :
         }
     }
 
+    private fun observeState() {
+        viewModel.viewInstructions.onEach {
+            when (it) {
+                is CharactersInstructions.CharacterClickedState -> goToCharacterDetail(it.id)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-    private fun initActions() {
-        viewModel.goToCharacterDetail = ::goToCharacterDetail
-        viewModel.onCharactersLoaded = ::onCharactersLoaded
-        viewModel.onErrorLoadingCharacters = ::onErrorLoadingCharacters
+        viewModel.charactersState.observe(viewLifecycleOwner) {
+            when (it) {
+                is CharactersState.CharactersLoadedState -> onCharactersLoaded(it.characters)
+                is CharactersState.ErrorLoadingCharactersState -> onErrorLoadingCharacters()
+            }
+        }
     }
-
 
     private fun initList() {
         adapter = CharactersAdapter(requireContext(), characters, viewModel)
@@ -67,18 +77,18 @@ class CharactersFragment :
         setRecyclerListener()
     }
 
-    fun goToCharacterDetail(id: Int) {
+    private fun goToCharacterDetail(id: Int) {
         navigator.navigate(CharacterDetailFragment(), true, Bundle().apply {
             putInt(EXTRA_CHARACTER_ID, id)
         })
     }
 
-    fun onErrorLoadingCharacters() {
+    private fun onErrorLoadingCharacters() {
         viewModel.showErrorButton.value = true
         showErrorSnackBar(getString(R.string.splash_error_message))
     }
 
-    fun onCharactersLoaded(characters: ArrayList<Character>) {
+    private fun onCharactersLoaded(characters: ArrayList<Character>) {
         offset++
         this.characters.addAll(characters)
         adapter.notifyDataSetChanged()

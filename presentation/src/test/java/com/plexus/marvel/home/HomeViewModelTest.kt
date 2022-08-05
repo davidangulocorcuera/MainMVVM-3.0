@@ -13,20 +13,4 @@ class HomeViewModelTest {
     private val viewModel: HomeViewModel by lazy {
         Mockito.mock(HomeViewModel::class.java)
     }
-
-    @Before
-    fun setUp() {
-        val scenario = launchFragmentInContainer<HomeFragment>()
-        scenario.onFragment { fragment ->
-            fragment.apply {
-                viewModel.goToCharacters = ::goToCharacters
-            }
-        }
-    }
-
-    @Test
-    fun `user navigate to characters list`() {
-        Mockito.verify(viewModel.goToCharacters).invoke()
-    }
-
 }

@@ -21,8 +21,7 @@ class CharacterDetailViewModel(app: Application) : BaseViewModel(app) {
         (app as? App)?.component?.inject(this)
     }
 
-    lateinit var onCharacterLoaded: (character: Character) -> Unit
-    lateinit var onErrorLoadingCharacter: () -> Unit
+    var characterState = MutableLiveData<CharacterDetailState>()
     var loading = MutableLiveData<Boolean>()
     var showErrorButton = MutableLiveData<Boolean>(false)
     var character = MutableLiveData<Character>()
@@ -35,14 +34,15 @@ class CharacterDetailViewModel(app: Application) : BaseViewModel(app) {
                     onNext = {
                         loading.value = false
                         it.data?.results?.first()?.apply {
-                            onCharacterLoaded.invoke(this)
+                            characterState.value = CharacterDetailState.CharacterLoadedState(this)
+
                         } ?: run {
-                            onErrorLoadingCharacter.invoke()
+                            characterState.value = CharacterDetailState.ErrorLoadingCharacterState
                         }
                     },
                     onError = {
                         loading.value = false
-                        onErrorLoadingCharacter.invoke()
+                        characterState.value = CharacterDetailState.ErrorLoadingCharacterState
                     }
                 )
             )

@@ -7,7 +7,9 @@ import com.plexus.marvel.R
 import com.plexus.marvel.application.App
 import com.plexus.marvel.base.BaseFragment
 import com.plexus.marvel.databinding.FragmentSplashBinding
+import com.plexus.marvel.usescase.characters.CharactersState
 import com.plexus.marvel.usescase.home.HomeFragment
+import com.plexus.marvel.usescase.home.SplashState
 import kotlinx.coroutines.*
 
 /**
@@ -23,13 +25,17 @@ class SplashFragment :
     override fun viewCreated(view: View?) {
         mBinding.viewModel = viewModel
         mBinding.lifecycleOwner = this
-        initActions()
+        observeState()
         viewModel.getAllCharacters()
     }
 
-    private fun initActions() {
-        viewModel.onCharactersLoaded = ::onCharactersLoaded
-        viewModel.onErrorLoadingCharacters = ::onErrorLoadingCharacters
+    private fun observeState(){
+        viewModel.splashState.observe(viewLifecycleOwner){
+            when(it){
+                is SplashState.CharactersLoadedState -> onCharactersLoaded(it.characters)
+                is SplashState.ErrorLoadingCharactersState -> onErrorLoadingCharacters()
+            }
+        }
     }
 
     fun onCharactersLoaded(characters: ArrayList<Character>) {
