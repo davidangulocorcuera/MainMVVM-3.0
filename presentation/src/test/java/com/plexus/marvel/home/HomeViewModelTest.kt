@@ -1,10 +1,6 @@
 package com.plexus.marvel.home
 
-import androidx.fragment.app.testing.launchFragmentInContainer
-import com.plexus.marvel.usescase.home.HomeFragment
-import com.plexus.marvel.usescase.home.HomeViewModel
-import org.junit.Test
-import org.junit.Before
+import com.plexus.marvel.features.home.HomeViewModel
 import org.mockito.Mockito
 
 

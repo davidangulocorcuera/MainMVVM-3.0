@@ -11,4 +11,5 @@
     <color name="colorSuperLight">#FFFFFFFF</color>
     <color name="colorDarkest">#000000</color>
     <color name="colorRegular">#7C7C7C</color>
+    <color name="transparent">#007C7C7C</color>
 </resources>

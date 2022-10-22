@@ -21,7 +21,7 @@ class Navigator(private val activity: BaseActivity<*, *>) {
      */
 
     fun navigate(
-        fragmentToGo: BaseFragment<*, *>,
+        fragmentToGo: BaseFragment<*>,
         addBackStack: Boolean = false,
         arguments: Bundle? = null,
     ) {

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.plexus.marvel.usescase.MainViewModel" />
+            type="com.plexus.marvel.features.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

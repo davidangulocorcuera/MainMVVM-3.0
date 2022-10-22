@@ -1,12 +1,6 @@
 package com.plexus.marvel.characterdetail
 
-import androidx.fragment.app.testing.launchFragmentInContainer
-import com.plexus.domain.Character
-import com.plexus.domain.Image
-import com.plexus.marvel.usescase.characterdetail.CharacterDetailFragment
-import com.plexus.marvel.usescase.characterdetail.CharacterDetailViewModel
-import org.junit.Test
-import org.junit.Before
+import com.plexus.marvel.features.characterdetail.CharacterDetailViewModel
 import org.mockito.Mockito
 
 

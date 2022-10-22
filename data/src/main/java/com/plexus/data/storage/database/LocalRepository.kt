@@ -21,6 +21,7 @@ class LocalRepository {
         }
     }
 
+
     fun getAllCharacters(db: AppDatabase): ArrayList<Character> {
         val characters = ArrayList<Character>()
         db.charactersDao().getAllCharacters().forEach {

@@ -1,15 +1,17 @@
-package com.plexus.marvel.usescase.splash
+package com.plexus.marvel.features.splash
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.plexus.data.cloud.repository.ServicesRepository
 import com.plexus.marvel.application.App
 import com.plexus.marvel.base.BaseViewModel
 import com.plexus.marvel.base.mDisposable
-import com.plexus.marvel.usescase.home.SplashState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
@@ -20,27 +22,27 @@ class SplashViewModel(app: Application) : BaseViewModel(app) {
         (app as? App)?.component?.inject(this)
     }
 
-    var loading = MutableLiveData<Boolean>()
-    var splashState = MutableLiveData<SplashState>()
-    var showErrorButton = MutableLiveData<Boolean>(false)
+    private val _splashState = MutableStateFlow<SplashState>(SplashState.Loading)
+    val splashState: StateFlow<SplashState> = _splashState
 
     fun getAllCharacters() {
-        showErrorButton.value = false
-        loading.value = true
+        viewModelScope.launch {
+            _splashState.emit(SplashState.Loading)
+        }
         ServicesRepository().getAllCharacters()?.apply {
             mDisposable.add(subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        loading.value = false
-                        it.data?.results?.apply {
-                            splashState.value = SplashState.CharactersLoadedState(this)
-                        } ?: run {
-                            splashState.value = SplashState.ErrorLoadingCharactersState
+                        viewModelScope.launch {
+                            it.data?.results?.let { characters ->
+                                _splashState.emit(SplashState.CharactersLoadedState(characters))
+                            }
                         }
                     },
                     onError = {
-                        loading.value = false
-                        splashState.value = SplashState.ErrorLoadingCharactersState
+                        viewModelScope.launch {
+                            _splashState.emit(SplashState.ErrorLoadingCharactersState)
+                        }
                     }
                 )
             )

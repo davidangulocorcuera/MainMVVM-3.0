@@ -1,10 +1,10 @@
-package com.plexus.marvel.usescase
+package com.plexus.marvel.features
 
 import android.os.Bundle
 import com.plexus.marvel.R
 import com.plexus.marvel.base.BaseActivity
 import com.plexus.marvel.databinding.ActivityMainBinding
-import com.plexus.marvel.usescase.splash.SplashFragment
+import com.plexus.marvel.features.splash.SplashFragment
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es

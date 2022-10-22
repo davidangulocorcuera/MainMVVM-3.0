@@ -3,4 +3,5 @@
     <string name="splash_error_message">Ha ocurrido un error inesperado</string>
     <string name="retry">Reintentar</string>
     <string name="go_to_characters_list">Ir a la lista de personajes</string>
+    <string name="characters_toolbar_title">Personajes</string>
 </resources>
