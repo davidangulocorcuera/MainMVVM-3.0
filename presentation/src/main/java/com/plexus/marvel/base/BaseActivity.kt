@@ -4,9 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.plexus.marvel.R
@@ -15,38 +24,10 @@ import com.plexus.marvel.R
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(private val mViewModelClass: Class<VM>) :
-    AppCompatActivity(), GlobalAction {
+abstract class BaseActivity : AppCompatActivity(), GlobalAction {
 
-    @LayoutRes
-    abstract fun getLayoutRes(): Int
-
-    val binding by lazy {
-        DataBindingUtil.setContentView(this, getLayoutRes()) as DB
-    }
     val navigator: Navigator by lazy {
         Navigator(this)
-    }
-
-    val viewModel by lazy {
-        ViewModelProvider(this).get(mViewModelClass)
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        initViewModel(viewModel)
-        super.onCreate(savedInstanceState)
-    }
-
-    abstract fun initViewModel(viewModel: VM)
-
-    fun showErrorSnackBar(text: String) {
-        val parentLayout = findViewById<View>(android.R.id.content)
-        val snackBar = Snackbar.make(parentLayout, text, Snackbar.LENGTH_SHORT)
-        snackBar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed))
-        snackBar.setActionTextColor(ContextCompat.getColor(this, R.color.colorSuperLight))
-        snackBar.show()
-
     }
 
 }

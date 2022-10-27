@@ -7,7 +7,7 @@ import com.plexus.marvel.R
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class Navigator(private val activity: BaseActivity<*, *>) {
+class Navigator(private val activity: BaseActivity) {
 
     private var fragmentManager = activity.supportFragmentManager
 
@@ -21,7 +21,7 @@ class Navigator(private val activity: BaseActivity<*, *>) {
      */
 
     fun navigate(
-        fragmentToGo: BaseFragment<*>,
+        fragmentToGo: BaseFragment,
         addBackStack: Boolean = false,
         arguments: Bundle? = null,
     ) {

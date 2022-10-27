@@ -1,16 +1,15 @@
 package com.plexus.marvel.features
 
-import android.app.Application
-import com.plexus.marvel.application.App
-import com.plexus.marvel.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class MainViewModel(app: Application) : BaseViewModel(app) {
-    init {
-        (app as? App)?.component?.inject(this)
-    }
+@HiltViewModel
+class MainViewModel @Inject constructor() : ViewModel() {
+
 }

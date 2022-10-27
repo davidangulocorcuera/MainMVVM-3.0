@@ -4,23 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.plexus.marvel.components.CustomTopAppBar
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-abstract class BaseFragment<VM : BaseViewModel>(private val mViewModelClass: Class<VM>) :
-    Fragment(), GlobalAction {
-    lateinit var viewModel: VM
-
-    private val baseActivity: BaseActivity<*, *>
+abstract class BaseFragment : Fragment(), GlobalAction {
+    private val baseActivity: BaseActivity
         get() {
-            return activity as BaseActivity<*, *>
+            return activity as BaseActivity
         }
 
     val navigator: Navigator
@@ -31,19 +28,10 @@ abstract class BaseFragment<VM : BaseViewModel>(private val mViewModelClass: Cla
 
     val LOG_TAG = this::class.java.simpleName
 
-
     open fun viewCreated(view: View?) {}
 
     @Composable
     protected abstract fun SetComposeView()
-
-
-    private fun getViewM(): VM = ViewModelProvider(this).get(mViewModelClass)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = getViewM()
-    }
 
     override fun onViewCreated(
         view: View,

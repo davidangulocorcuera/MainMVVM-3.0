@@ -11,12 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.viewModels
 import coil.compose.rememberAsyncImagePainter
 import com.plexus.marvel.R
 import com.plexus.marvel.base.BaseFragment
 import com.plexus.marvel.components.CustomButton
 import com.plexus.marvel.components.CustomProgressIndicator
 import com.plexus.marvel.components.CustomTopAppBar
+import com.plexus.marvel.features.characters.CharactersViewModel
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import com.plexus.marvel.utils.getImageUrl
 
@@ -25,9 +27,13 @@ import com.plexus.marvel.utils.getImageUrl
  * */
 
 class CharacterDetailFragment :
-    BaseFragment<CharacterDetailViewModel>(CharacterDetailViewModel::class.java) {
+    BaseFragment() {
 
     var characterId = 0
+
+    private val viewModel: CharacterDetailViewModel by viewModels()
+
+
 
     override fun viewCreated(view: View?) {
         characterId = arguments?.getInt(EXTRA_CHARACTER_ID) ?: 0

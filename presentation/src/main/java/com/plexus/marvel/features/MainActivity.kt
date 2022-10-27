@@ -1,28 +1,24 @@
 package com.plexus.marvel.features
 
 import android.os.Bundle
-import com.plexus.marvel.R
+import androidx.activity.compose.setContent
+import androidx.navigation.compose.rememberNavController
 import com.plexus.marvel.base.BaseActivity
-import com.plexus.marvel.databinding.ActivityMainBinding
-import com.plexus.marvel.features.splash.SplashFragment
+import com.plexus.marvel.components.CustomNavGraph
+import com.plexus.marvel.features.splash.SplashScreen
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
-    MainViewModel::class.java
-) {
-
-    override fun initViewModel(viewModel: MainViewModel) {
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-    }
-
-    override fun getLayoutRes() = R.layout.activity_main
+@AndroidEntryPoint
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigator.navigate(SplashFragment(), addBackStack = false)
+        setContent {
+            CustomNavGraph()
+        }
     }
 }

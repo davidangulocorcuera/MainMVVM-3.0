@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.viewModels
 import com.plexus.marvel.R
 import com.plexus.marvel.base.BaseFragment
 import com.plexus.marvel.components.CustomButton
@@ -29,6 +30,7 @@ import com.plexus.marvel.components.CustomCardView
 import com.plexus.marvel.components.CustomProgressIndicator
 import com.plexus.marvel.components.CustomTopAppBar
 import com.plexus.marvel.features.characterdetail.CharacterDetailFragment
+import com.plexus.marvel.features.home.HomeViewModel
 import com.plexus.marvel.utils.Constants.Companion.EXTRA_CHARACTER_ID
 import com.plexus.marvel.utils.getImageUrl
 
@@ -36,9 +38,11 @@ import com.plexus.marvel.utils.getImageUrl
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class CharactersFragment : BaseFragment<CharactersViewModel>(CharactersViewModel::class.java) {
+class CharactersFragment : BaseFragment() {
 
     private var offset = 0
+
+    private val viewModel: CharactersViewModel by viewModels()
 
 
     override fun viewCreated(view: View?) {

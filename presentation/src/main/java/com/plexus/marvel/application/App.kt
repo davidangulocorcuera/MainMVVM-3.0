@@ -4,28 +4,11 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.plexus.data.storage.database.AppDatabase
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class App : Application() {
-    private lateinit var database: AppDatabase
-
-
-    val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-    }
-
-    fun getDatabase(context: Context): AppDatabase {
-        if (!::database.isInitialized) {
-            database = Room.databaseBuilder(context, AppDatabase::class.java, "marvel_database")
-                .fallbackToDestructiveMigration()
-                .build()
-        }
-        return database
-    }
-
-}
+@HiltAndroidApp
+class App : Application()
