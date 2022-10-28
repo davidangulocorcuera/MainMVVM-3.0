@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.plexus.domain.Character
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
@@ -21,15 +23,18 @@ import com.plexus.domain.Character
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val repository: LocalRepository,
+    private val repository: LocalRepository
 ) : ViewModel() {
     private val _splashState = MutableStateFlow<SplashState>(SplashState.Loading)
     val splashState: StateFlow<SplashState> = _splashState
 
+    private val _splashNavigation = MutableSharedFlow<SplashNavigation>()
+    val splashNavigation: Flow<SplashNavigation> = _splashNavigation
+
     private fun saveCharactersInDatabase(characters: List<Character>) {
         viewModelScope.launch {
             repository.saveAllCharacters(characters)
-            _splashState.emit(SplashState.CharactersLoadedState)
+            _splashNavigation.emit(SplashNavigation.NavigateToHome)
         }
     }
 
@@ -55,5 +60,14 @@ class SplashViewModel @Inject constructor(
                     }
                 )
         }
+    }
+
+    sealed class SplashNavigation {
+        object NavigateToHome : SplashNavigation()
+    }
+
+    sealed class SplashState {
+        object ErrorLoadingCharactersState : SplashState()
+        object Loading : SplashState()
     }
 }

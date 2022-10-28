@@ -20,13 +20,13 @@ android {
 
     buildTypes {
         pre {
-            minifyEnabled false
+            minifyEnabled true
             buildConfigField("String","API_KEY","\"03bb79ffc5f02332b66c445e889dd6ca\"")
             buildConfigField("String","API_URL","\"https://gateway.marvel.com:443/\"")
             buildConfigField("String","API_HASH","\"393c6a49994fc0ad745b79b8ccc51ee2\"")
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String","API_KEY","\"03bb79ffc5f02332b66c445e889dd6ca\"")
             buildConfigField("String","API_URL","\"https://gateway.marvel.com:443/\"")

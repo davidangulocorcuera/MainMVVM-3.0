@@ -2,10 +2,8 @@ package com.plexus.marvel.features
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.navigation.compose.rememberNavController
 import com.plexus.marvel.base.BaseActivity
-import com.plexus.marvel.components.CustomNavGraph
-import com.plexus.marvel.features.splash.SplashScreen
+import com.plexus.marvel.navigation.CustomNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

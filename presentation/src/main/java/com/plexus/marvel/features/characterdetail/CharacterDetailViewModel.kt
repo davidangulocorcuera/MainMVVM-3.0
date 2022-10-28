@@ -1,10 +1,12 @@
 package com.plexus.marvel.features.characterdetail
 
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.plexus.data.cloud.repository.ServicesRepository
 import com.plexus.data.storage.database.LocalRepository
+import com.plexus.domain.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -28,6 +30,7 @@ class CharacterDetailViewModel @Inject constructor(
     val characterState: StateFlow<CharacterDetailState> = _characterState
 
 
+    @SuppressLint("CheckResult")
     fun getCharacterDetail(id: Int) {
         ServicesRepository().getCharacterDetail(id = id)?.apply {
             viewModelScope.launch {
@@ -53,5 +56,11 @@ class CharacterDetailViewModel @Inject constructor(
                     }
                 )
         }
+    }
+
+    sealed class CharacterDetailState {
+        data class CharacterLoadedState(val character: Character) : CharacterDetailState()
+        object ErrorLoadingCharacterState : CharacterDetailState()
+        object Loading : CharacterDetailState()
     }
 }

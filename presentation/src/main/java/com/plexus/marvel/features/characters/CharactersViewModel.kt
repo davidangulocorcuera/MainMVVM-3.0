@@ -1,7 +1,9 @@
 package com.plexus.marvel.features.characters
 
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.plexus.data.cloud.repository.ServicesRepository
@@ -34,6 +36,9 @@ class CharactersViewModel @Inject constructor(
     private val _characters = mutableStateListOf<Character>()
     val characters: List<Character> = _characters
 
+    var offset = MutableLiveData(0)
+
+    @SuppressLint("CheckResult")
     fun getAllCharacters(offset: Int) {
         viewModelScope.launch {
             _charactersState.emit(CharactersState.Loading)
@@ -74,5 +79,13 @@ class CharactersViewModel @Inject constructor(
                 _charactersState.value = CharactersState.CharactersLoadedState(characters)
             }
         }
+    }
+    sealed class CharactersState {
+        data class CharactersLoadedState(val characters: List<Character>) : CharactersState()
+        object ErrorLoadingCharactersState : CharactersState()
+        object Loading : CharactersState()
+    }
+    sealed class CharactersInstructions {
+        data class CharacterClickedState(val id: Int) : CharactersInstructions()
     }
 }

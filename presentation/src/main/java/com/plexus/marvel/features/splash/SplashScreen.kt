@@ -4,29 +4,37 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.plexus.marvel.R
 import com.plexus.marvel.components.CustomButton
 import com.plexus.marvel.components.CustomLoading
+import com.plexus.marvel.navigation.Screen
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
 @Composable
 fun SplashScreen(
     viewModel: SplashViewModel = hiltViewModel(),
-    navController: NavHostController
+    navController: NavController
 ) {
     val state by viewModel.splashState.collectAsState()
 
-    // called once every time this composable enters the composition
     LaunchedEffect(Unit) {
         viewModel.getAllCharacters()
+        viewModel.splashNavigation.onEach {
+            when (it) {
+                is SplashViewModel.SplashNavigation.NavigateToHome -> navController.navigate(Screen.Home.route) {
+                    popUpTo(Screen.Splash.route) {
+                        inclusive = true
+                    }
+                }
+            }
+        }.launchIn(this)
     }
 
     Column(
@@ -35,14 +43,12 @@ fun SplashScreen(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center
     ) {
+
         when (state) {
-            is SplashState.CharactersLoadedState -> {
-                //navigate
-            }
-            SplashState.ErrorLoadingCharactersState -> CustomButton(
+            SplashViewModel.SplashState.ErrorLoadingCharactersState -> CustomButton(
                 text = stringResource(R.string.splash_error_message),
                 onClick = { viewModel.getAllCharacters() })
-            SplashState.Loading -> CustomLoading(anim = R.raw.anim_loading)
+            SplashViewModel.SplashState.Loading -> CustomLoading(anim = R.raw.anim_loading)
         }
     }
 }

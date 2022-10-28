@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomProgressIndicator() {
+fun CustomProgressIndicator(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
 
     val progressAnimationValue by infiniteTransition.animateFloat(
@@ -23,12 +23,10 @@ fun CustomProgressIndicator() {
         animationSpec = infiniteRepeatable(animation = tween(1000))
     )
 
-    Box{
-        CircularProgressIndicator(
-            progress = progressAnimationValue,
-            modifier = Modifier
-                .size(50.dp)
-                .align(Alignment.Center)
-        )
-    }
+    CircularProgressIndicator(
+        progress = progressAnimationValue,
+        modifier = modifier
+            .size(50.dp)
+    )
+
 }
