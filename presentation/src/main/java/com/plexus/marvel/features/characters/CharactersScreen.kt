@@ -29,6 +29,8 @@ import com.plexus.marvel.components.CustomButton
 import com.plexus.marvel.components.CustomCardView
 import com.plexus.marvel.components.CustomProgressIndicator
 import com.plexus.marvel.components.CustomTopAppBar
+import com.plexus.marvel.navigation.Constants.CHARACTER_ID
+import com.plexus.marvel.navigation.Screen
 import com.plexus.marvel.utils.getImageUrl
 
 
@@ -46,12 +48,17 @@ fun CharactersScreen(
         Column {
             CustomTopAppBar(
                 title = stringResource(R.string.characters_toolbar_title),
-                onBackClick = { },
+                onBackClick = {
+                    navController.popBackStack()
+                },
                 endActions = listOf { RefreshAction { viewModel.reloadCharacters() } }
             )
-            CharactersList(viewModel.characters) {
-                viewModel.getAllCharacters(offset.value)
-            }
+            CharactersList(
+                items = viewModel.characters,
+                navController = navController,
+                onEndOfScroll = {
+                    viewModel.getAllCharacters(offset.value)
+                })
         }
         when (state) {
             is CharactersViewModel.CharactersState.CharactersLoadedState -> offset.value.plus(1)
@@ -83,7 +90,11 @@ private fun RefreshAction(onClick: () -> Unit) {
 }
 
 @Composable
-private fun CharactersList(items: List<Character>, onEndOfScroll: () -> Unit) {
+private fun CharactersList(
+    items: List<Character>,
+    onEndOfScroll: () -> Unit,
+    navController: NavHostController
+) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
         Modifier.scrollable(rememberScrollState(), Orientation.Vertical),
@@ -92,7 +103,14 @@ private fun CharactersList(items: List<Character>, onEndOfScroll: () -> Unit) {
         itemsIndexed(items) { index, item ->
             CustomCardView(
                 modifier = Modifier.size(150.dp),
-                onClick = { /*goToCharacterDetail(item.id)*/ },
+                onClick = {
+                    navController.navigate(
+                        Screen.CharacterDetail.route.replace(
+                            oldValue = "{$CHARACTER_ID}",
+                            newValue = "${item.id}"
+                        )
+                    )
+                },
                 image = item.getImageUrl(),
                 cornerRadius = 8.dp,
                 elevation = 8.dp

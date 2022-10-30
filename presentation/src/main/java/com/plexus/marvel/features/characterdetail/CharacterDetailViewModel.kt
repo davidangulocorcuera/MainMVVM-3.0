@@ -22,9 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
-    private val repository: LocalRepository,
-    app: Application
-) : ViewModel() {
+    private val repository: LocalRepository) : ViewModel() {
     private val _characterState =
         MutableStateFlow<CharacterDetailState>(CharacterDetailState.Loading)
     val characterState: StateFlow<CharacterDetailState> = _characterState

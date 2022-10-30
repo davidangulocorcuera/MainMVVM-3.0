@@ -11,7 +11,7 @@ import com.plexus.marvel.features.characterdetail.CharacterDetailScreen
 import com.plexus.marvel.features.characters.CharactersScreen
 import com.plexus.marvel.features.home.HomeScreen
 import com.plexus.marvel.features.splash.SplashScreen
-import com.plexus.marvel.navigation.Constants.USER_ID
+import com.plexus.marvel.navigation.Constants.CHARACTER_ID
 
 @Composable
 fun CustomNavGraph(
@@ -29,8 +29,13 @@ fun CustomNavGraph(
         }
         composable(
             Screen.CharacterDetail.route,
-            arguments = listOf(navArgument(USER_ID) { type = NavType.IntType })
-        ) { CharacterDetailScreen(navController = navController) }
+            arguments = listOf(navArgument(CHARACTER_ID) { type = NavType.IntType })
+        ) { backStackEntry ->
+            CharacterDetailScreen(
+                navController = navController,
+                characterId = backStackEntry.arguments?.getInt(CHARACTER_ID) ?: 0
+            )
+        }
     }
 }
 

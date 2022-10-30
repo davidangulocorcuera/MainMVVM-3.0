@@ -2,7 +2,7 @@ package com.plexus.marvel.features
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.plexus.marvel.base.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.plexus.marvel.navigation.CustomNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * */
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

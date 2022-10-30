@@ -8,41 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorAccent</item>
     </style>
-
-    <style name="MainCardView" parent="Clickable">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:elevation">@dimen/defaultElevation</item>
-        <item name="android:backgroundTint">@color/colorSuperLight</item>
-        <item name="cardCornerRadius">@dimen/defaultElevation</item>
-    </style>
-
-    <style name="Clickable">
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-    </style>
-
-    <style name="Title">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorDarkest</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:layout_marginTop">@dimen/space_medium15</item>
-        <item name="android:layout_marginEnd">@dimen/space_medium15</item>
-        <item name="android:layout_marginStart">@dimen/space_medium15</item>
-    </style>
-
-    <style name="RegularText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorRegular</item>
-        <item name="android:textSize">13sp</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:layout_marginTop">@dimen/space_medium15</item>
-        <item name="android:layout_marginEnd">@dimen/space_medium15</item>
-        <item name="android:layout_marginStart">@dimen/space_medium15</item>
-        <item name="android:layout_marginBottom">@dimen/space_medium15</item>
-    </style>
 </resources>

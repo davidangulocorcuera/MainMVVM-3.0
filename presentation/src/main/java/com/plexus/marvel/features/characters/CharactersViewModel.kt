@@ -26,8 +26,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val repository: LocalRepository,
-    app: Application
+    private val repository: LocalRepository
 ) : ViewModel() {
 
     private val _charactersState = MutableStateFlow<CharactersState>(CharactersState.Loading)

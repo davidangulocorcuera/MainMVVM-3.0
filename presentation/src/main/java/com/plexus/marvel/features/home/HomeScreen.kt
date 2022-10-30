@@ -25,5 +25,4 @@ fun HomeScreen(
                 navController.navigate(Screen.Characters.route)
             })
     }
-
 }
