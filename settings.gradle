@@ -18,7 +18,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "marvel"
+rootProject.name = "mainApp"
 include ':presentation'
 include ':data'
 include ':domain'
