@@ -1,4 +1,4 @@
-package com.plexus.marvel.application
+package com.marvel.app.application
 
 import android.content.Context
 import androidx.room.Room
@@ -7,20 +7,16 @@ import com.plexus.data.storage.database.LocalRepository
 import com.plexus.data.storage.database.converters.CharactersDao
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
-
-@Module
+// DatabaseModule
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
-
+@Module
+class DataModule {
     @Singleton
     @Provides
     fun provideDatabase(
@@ -40,5 +36,4 @@ class ApplicationModule {
     @Provides
     fun provideLocalRepository(charactersDao: CharactersDao): LocalRepository =
         LocalRepository(charactersDao)
-
 }
