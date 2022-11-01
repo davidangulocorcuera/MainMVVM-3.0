@@ -3,7 +3,7 @@ package com.plexus.data.storage.database.converters
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.plexus.domain.Image
+import com.plexus.domain.model.Image
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es

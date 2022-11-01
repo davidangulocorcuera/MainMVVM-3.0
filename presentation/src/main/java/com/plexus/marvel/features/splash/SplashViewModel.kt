@@ -3,8 +3,6 @@ package com.plexus.marvel.features.splash
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.plexus.data.cloud.repository.ServicesRepository
-import com.plexus.data.storage.database.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -13,7 +11,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
+import com.plexus.domain.usecases.GetAllCharactersUseCase
+import com.plexus.domain.usecases.SaveCharactersInDatabaseUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 
@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val repository: LocalRepository,
-    private val servicesRepository: ServicesRepository,
+    private val getAllCharactersUseCase: GetAllCharactersUseCase,
+    private val saveCharactersInDatabaseUseCase: SaveCharactersInDatabaseUseCase,
 
     ) : ViewModel() {
     private val _splashState = MutableStateFlow<SplashState>(SplashState.Loading)
@@ -35,7 +35,7 @@ class SplashViewModel @Inject constructor(
 
     private fun saveCharactersInDatabase(characters: List<Character>) {
         viewModelScope.launch {
-            repository.saveAllCharacters(characters)
+            saveCharactersInDatabaseUseCase.saveAllCharacters(characters)
             _splashNavigation.emit(SplashNavigation.NavigateToHome)
         }
     }
@@ -45,10 +45,10 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             _splashState.emit(SplashState.Loading)
         }
-       servicesRepository.getAllCharacters().apply {
+        getAllCharactersUseCase.getAllCharacters().apply {
             subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onNext = {
+                    onSuccess = {
                         viewModelScope.launch {
                             it.data?.results?.let { characters ->
                                 saveCharactersInDatabase(characters)

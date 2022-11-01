@@ -1,14 +1,13 @@
 package com.plexus.marvel.features.characters
 
 import android.annotation.SuppressLint
-import android.app.Application
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.plexus.data.cloud.repository.ServicesRepository
-import com.plexus.data.storage.database.LocalRepository
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
+import com.plexus.domain.usecases.GetAllCharactersUseCase
+import com.plexus.domain.usecases.GetCharactersFromDatabaseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -26,8 +25,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val repository: LocalRepository,
-    private val servicesRepository: ServicesRepository,
+    private val getAllCharactersUseCase: GetAllCharactersUseCase,
+    private val getCharactersFromDatabaseUseCase: GetCharactersFromDatabaseUseCase,
     ) : ViewModel() {
 
     private val _charactersState = MutableStateFlow<CharactersState>(CharactersState.Loading)
@@ -43,10 +42,10 @@ class CharactersViewModel @Inject constructor(
         viewModelScope.launch {
             _charactersState.emit(CharactersState.Loading)
         }
-        servicesRepository.getAllCharacters(offset = offset).apply {
+        getAllCharactersUseCase.getAllCharacters(offset = offset).apply {
             subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onNext = {
+                    onSuccess = {
                         it.data?.results?.let { characters ->
                             viewModelScope.launch {
                                 _characters.addAll(characters)
@@ -74,7 +73,7 @@ class CharactersViewModel @Inject constructor(
 
     fun getAllCharactersFromDatabase() {
         viewModelScope.launch(Dispatchers.IO) {
-            _characters.addAll(repository.getAllCharacters())
+            _characters.addAll(getCharactersFromDatabaseUseCase.getAllCharacters())
             withContext(Dispatchers.Main) {
                 _charactersState.value = CharactersState.CharactersLoadedState(characters)
             }

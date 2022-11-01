@@ -7,8 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plexus.data.storage.database.AppDatabase
 import com.plexus.data.storage.database.converters.CharacterDB
 import com.plexus.data.storage.database.converters.CharactersDao
-import com.plexus.domain.Character
-import com.plexus.domain.Image
+import com.plexus.domain.model.Image
 import org.junit.After
 import org.junit.Test
 

@@ -2,17 +2,18 @@ package com.plexus.data.storage.database
 
 import com.plexus.data.storage.database.converters.CharacterDB
 import com.plexus.data.storage.database.converters.CharactersDao
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
+import com.plexus.domain.repository.LocalRepository
 import javax.inject.Inject
 
 /**
  * © Class created by David Angulo , david.angulocorcuera@plexus.es
  * */
 
-class LocalRepository @Inject constructor(
+class LocalRepositoryImpl @Inject constructor(
     private val charactersDao: CharactersDao
-) {
-  suspend fun saveAllCharacters(characters: List<Character>) {
+) : LocalRepository {
+    override suspend fun saveAllCharacters(characters: List<Character>) {
         characters.forEach {
             charactersDao.insertCharacter(
                 CharacterDB(
@@ -25,7 +26,7 @@ class LocalRepository @Inject constructor(
         }
     }
 
-    fun getAllCharacters(): List<Character> =
+    override fun getAllCharacters(): List<Character> =
         charactersDao.getAllCharacters().map {
             Character(
                 id = it.id,

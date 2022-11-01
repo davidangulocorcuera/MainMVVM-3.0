@@ -1,5 +1,5 @@
 package com.plexus.marvel.utils
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
 
 /**
  * © File created by David Angulo , david.angulocorcuera@plexus.es

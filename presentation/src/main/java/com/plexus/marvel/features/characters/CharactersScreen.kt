@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.plexus.marvel.R
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
 import com.plexus.marvel.components.CustomButton
 import com.plexus.marvel.components.CustomCardView
 import com.plexus.marvel.components.CustomProgressIndicator

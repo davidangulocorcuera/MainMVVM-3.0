@@ -2,7 +2,7 @@ package com.marvel.app.application
 
 import com.plexus.data.BuildConfig
 import com.plexus.data.cloud.api.ApiServices
-import com.plexus.data.cloud.repository.ServicesRepository
+import com.plexus.data.cloud.repository.ServicesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,8 +47,7 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun provideServicesRepository(apiServices: ApiServices): ServicesRepository =
-        ServicesRepository(apiServices)
-
+    fun provideServicesRepository(apiServices: ApiServices): ServicesRepositoryImpl =
+        ServicesRepositoryImpl(apiServices)
 
 }

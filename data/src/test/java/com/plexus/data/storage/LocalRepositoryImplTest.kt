@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.plexus.data.storage.database.AppDatabase
-import com.plexus.data.storage.database.LocalRepository
-import com.plexus.domain.Character
-import com.plexus.domain.Image
+import com.plexus.data.storage.database.LocalRepositoryImpl
+import com.plexus.domain.model.Character
+import com.plexus.domain.model.Image
 import junit.framework.Assert.assertNotNull
 import org.junit.After
 import org.junit.Before
@@ -15,15 +15,15 @@ import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
 
-class LocalRepositoryTest {
+class LocalRepositoryImplTest {
     private lateinit var db: AppDatabase
-    private lateinit var repository: LocalRepository
+    private lateinit var repository: LocalRepositoryImpl
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        repository = mock(LocalRepository::class.java)
+        repository = mock(LocalRepositoryImpl::class.java)
     }
 
     @After

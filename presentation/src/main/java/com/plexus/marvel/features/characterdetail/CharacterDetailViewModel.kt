@@ -1,12 +1,10 @@
 package com.plexus.marvel.features.characterdetail
 
 import android.annotation.SuppressLint
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.plexus.data.cloud.repository.ServicesRepository
-import com.plexus.data.storage.database.LocalRepository
-import com.plexus.domain.Character
+import com.plexus.domain.model.Character
+import com.plexus.domain.usecases.GetCharacterDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -22,8 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
-    private val repository: LocalRepository,
-    private val servicesRepository: ServicesRepository,
+    private val useCase: GetCharacterDetailUseCase,
     ) : ViewModel() {
     private val _characterState =
         MutableStateFlow<CharacterDetailState>(CharacterDetailState.Loading)
@@ -32,13 +29,13 @@ class CharacterDetailViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun getCharacterDetail(id: Int) {
-        servicesRepository.getCharacterDetail(id = id).apply {
+        useCase.getCharacterDetail(id = id).apply {
             viewModelScope.launch {
                 _characterState.emit(CharacterDetailState.Loading)
             }
             subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onNext = {
+                    onSuccess = {
                         it.data?.results?.first()?.let { character ->
                             viewModelScope.launch {
                                 _characterState.emit(

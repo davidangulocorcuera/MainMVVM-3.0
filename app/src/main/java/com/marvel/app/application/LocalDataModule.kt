@@ -3,7 +3,7 @@ package com.marvel.app.application
 import android.content.Context
 import androidx.room.Room
 import com.plexus.data.storage.database.AppDatabase
-import com.plexus.data.storage.database.LocalRepository
+import com.plexus.data.storage.database.LocalRepositoryImpl
 import com.plexus.data.storage.database.converters.CharactersDao
 import dagger.Module
 import dagger.Provides
@@ -31,6 +31,6 @@ class LocalDataModule {
 
     @Singleton
     @Provides
-    fun provideLocalRepository(charactersDao: CharactersDao): LocalRepository =
-        LocalRepository(charactersDao)
+    fun provideLocalRepository(charactersDao: CharactersDao): LocalRepositoryImpl =
+        LocalRepositoryImpl(charactersDao)
 }
