@@ -5,21 +5,17 @@ import com.plexus.data.cloud.ServicesConstants
 import com.plexus.data.cloud.model.BaseResponse
 import com.plexus.domain.CharactersResponse
 import io.reactivex.Flowable
+import javax.inject.Inject
 
-class ServicesRepository {
-    private var api: ApiServices? = null
-
-    init {
-        api = ApiServices.RetrofitBuilder().create()
-    }
+class ServicesRepository @Inject constructor(private val apiServices: ApiServices) {
 
     fun getAllCharacters(
         versionApi: String = ServicesConstants.VERSION_API_V1,
         offset: Int = 0
-    ): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacters(versionApi, offset)
+    ): Flowable<BaseResponse<CharactersResponse>> = apiServices.getCharacters(versionApi, offset)
 
     fun getCharacterDetail(
         versionApi: String = ServicesConstants.VERSION_API_V1,
         id: Int
-    ): Flowable<BaseResponse<CharactersResponse>>? = api?.getCharacterDetail(versionApi, id)
+    ): Flowable<BaseResponse<CharactersResponse>> = apiServices.getCharacterDetail(versionApi, id)
 }

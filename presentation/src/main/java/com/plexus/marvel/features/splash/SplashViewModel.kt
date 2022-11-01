@@ -23,8 +23,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val repository: LocalRepository
-) : ViewModel() {
+    private val repository: LocalRepository,
+    private val servicesRepository: ServicesRepository,
+
+    ) : ViewModel() {
     private val _splashState = MutableStateFlow<SplashState>(SplashState.Loading)
     val splashState: StateFlow<SplashState> = _splashState
 
@@ -43,7 +45,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             _splashState.emit(SplashState.Loading)
         }
-        ServicesRepository().getAllCharacters()?.apply {
+       servicesRepository.getAllCharacters().apply {
             subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {

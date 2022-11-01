@@ -22,7 +22,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
-    private val repository: LocalRepository) : ViewModel() {
+    private val repository: LocalRepository,
+    private val servicesRepository: ServicesRepository,
+    ) : ViewModel() {
     private val _characterState =
         MutableStateFlow<CharacterDetailState>(CharacterDetailState.Loading)
     val characterState: StateFlow<CharacterDetailState> = _characterState
@@ -30,7 +32,7 @@ class CharacterDetailViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun getCharacterDetail(id: Int) {
-        ServicesRepository().getCharacterDetail(id = id)?.apply {
+        servicesRepository.getCharacterDetail(id = id).apply {
             viewModelScope.launch {
                 _characterState.emit(CharacterDetailState.Loading)
             }

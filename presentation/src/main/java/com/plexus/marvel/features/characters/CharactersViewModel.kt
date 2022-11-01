@@ -26,8 +26,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val repository: LocalRepository
-) : ViewModel() {
+    private val repository: LocalRepository,
+    private val servicesRepository: ServicesRepository,
+    ) : ViewModel() {
 
     private val _charactersState = MutableStateFlow<CharactersState>(CharactersState.Loading)
     val charactersState: StateFlow<CharactersState> = _charactersState
@@ -42,7 +43,7 @@ class CharactersViewModel @Inject constructor(
         viewModelScope.launch {
             _charactersState.emit(CharactersState.Loading)
         }
-        ServicesRepository().getAllCharacters(offset = offset)?.apply {
+        servicesRepository.getAllCharacters(offset = offset).apply {
             subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {

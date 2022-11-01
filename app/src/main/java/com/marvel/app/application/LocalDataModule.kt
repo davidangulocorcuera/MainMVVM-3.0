@@ -7,16 +7,14 @@ import com.plexus.data.storage.database.LocalRepository
 import com.plexus.data.storage.database.converters.CharactersDao
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-// DatabaseModule
 @InstallIn(SingletonComponent::class)
 @Module
-class DataModule {
+class LocalDataModule {
     @Singleton
     @Provides
     fun provideDatabase(
@@ -30,7 +28,6 @@ class DataModule {
     @Singleton
     @Provides
     fun provideCharactersDao(db: AppDatabase) = db.charactersDao()
-
 
     @Singleton
     @Provides
