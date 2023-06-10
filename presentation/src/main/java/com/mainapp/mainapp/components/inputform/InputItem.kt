@@ -2,7 +2,6 @@ package com.mainapp.mainapp.components.inputform
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.TextFieldDefaults.BackgroundOpacity
@@ -14,22 +13,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.regex.Pattern
 
 class InputItemData(
-    val modifier: Modifier = Modifier
-        .wrapContentHeight()
-        .fillMaxWidth(),
+    val modifier: Modifier = Modifier,
     val mainText: CustomText = CustomText(text = ""),
     val onClick: (() -> Unit)? = null,
+    val outsideLabel: Boolean = false,
     val label: CustomText? = null,
+    val showLeadingIconOnWriteAction: Boolean = false,
+    val showTrailingIconOnWriteAction: Boolean = false,
     val placeHolder: CustomText? = null,
-    val endIcon: CustomIcon? = null,
-    val startIcon: CustomIcon? = null,
+    val trailingIcon: CustomIcon? = null,
+    val leadingIcon: CustomIcon? = null,
     val textFieldColors: TextFieldColors? = null,
     val maxLines: Int = Int.MAX_VALUE,
     val enabled: Boolean = true,
@@ -57,15 +55,57 @@ internal fun OutlinedInput(
 ) {
     var isError by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf(item.mainText.text) }
+    var showLeadingIconOnWriteAction by remember { mutableStateOf(text.isNotEmpty() && item.showLeadingIconOnWriteAction) }
+    var showTrailingIconOnWriteAction by remember { mutableStateOf(text.isNotEmpty() && item.showTrailingIconOnWriteAction) }
+    val trailingIconView = @Composable {
+        IconButton(
+            onClick = {
+                item.trailingIcon?.onClick?.invoke()
+            },
+        ) {
+            item.trailingIcon?.let {
+                Icon(
+                    painter = painterResource(it.id),
+                    contentDescription = it.contentDesc,
+                    modifier = Modifier.clickable { item.onClick?.invoke() }
+                )
+            }
+        }
+    }
+    val leadingIconView = @Composable {
+        IconButton(
+            onClick = {
+                item.leadingIcon?.onClick?.invoke()
+            },
+        ) {
+            item.leadingIcon?.let {
+                Icon(
+                    painter = painterResource(it.id),
+                    contentDescription = it.contentDesc,
+                    modifier = Modifier.clickable { item.onClick?.invoke() }
+                )
+            }
+        }
+    }
     Column(modifier = modifier) {
+        if (item.outsideLabel) {
+            item.label?.let { it ->
+                Text(
+                    text = it.text,
+                    modifier = it.modifier,
+                    fontSize = it.fontSize,
+                    fontFamily = it.font,
+                    color = if (isError) item.errorMessage?.textColor
+                        ?: it.textColor else it.textColor
+                )
+            }
+        }
         Row(
             modifier = Modifier
                 .clickable {
                     item.onClick?.invoke()
                 }
-                .fillMaxSize()
         ) {
-            CustomIcon(item.startIcon)
             OutlinedTextField(
                 isError = isError,
                 value = text,
@@ -75,15 +115,22 @@ internal fun OutlinedInput(
                         isError = !validate(pattern, it)
                     }
                 },
+                leadingIcon = when{
+
+                    else -> null
+                } ,
+                trailingIcon = if (item.trailingIcon != null) trailingIconView else null,
                 label = {
-                    item.label?.let { it ->
-                        Text(
-                            text = it.text,
-                            modifier = it.modifier,
-                            fontSize = it.fontSize,
-                            fontFamily = it.font,
-                            color = it.textColor
-                        )
+                    if (!item.outsideLabel) {
+                        item.label?.let { it ->
+                            Text(
+                                text = it.text,
+                                modifier = it.modifier,
+                                fontSize = it.fontSize,
+                                fontFamily = it.font,
+                                color = it.textColor
+                            )
+                        }
                     }
                 },
                 placeholder = {
@@ -115,10 +162,11 @@ internal fun OutlinedInput(
                         errorLeadingIconColor = it.getErrorLeadingColor(),
                         disabledLeadingIconColor = it.getDisabledLeadingIconColor(),
                         leadingIconColor = it.getLeadingIconColor(),
-                        disabledIndicatorColor = it.getDisabledIndicatorColor())
+                        trailingIconColor = it.getTrailingIconColor(),
+                        disabledIndicatorColor = it.getDisabledIndicatorColor()
+                    )
                 } ?: TextFieldDefaults.outlinedTextFieldColors()
             )
-            CustomIcon(item.endIcon)
         }
         if (isError) CustomText(item.errorMessage)
     }
@@ -131,15 +179,56 @@ internal fun FilledInput(
 ) {
     var isError by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf(item.mainText.text) }
+
+    val trailingIconView = @Composable {
+        IconButton(
+            onClick = {
+                item.trailingIcon?.onClick?.invoke()
+            },
+        ) {
+            item.trailingIcon?.let {
+                Icon(
+                    painter = painterResource(it.id),
+                    contentDescription = it.contentDesc,
+                    modifier = Modifier.clickable { item.onClick?.invoke() }
+                )
+            }
+        }
+    }
+    val leadingIconView = @Composable {
+        IconButton(
+            onClick = {
+                item.leadingIcon?.onClick?.invoke()
+            },
+        ) {
+            item.leadingIcon?.let {
+                Icon(
+                    painter = painterResource(it.id),
+                    contentDescription = it.contentDesc,
+                    modifier = Modifier.clickable { item.onClick?.invoke() }
+                )
+            }
+        }
+    }
     Column(modifier = modifier) {
+        if (item.outsideLabel) {
+            item.label?.let { it ->
+                Text(
+                    text = it.text,
+                    modifier = it.modifier,
+                    fontSize = it.fontSize,
+                    fontFamily = it.font,
+                    color = if (isError) item.errorMessage?.textColor
+                        ?: it.textColor else it.textColor
+                )
+            }
+        }
         Row(
             modifier = Modifier
                 .clickable {
                     item.onClick?.invoke()
                 }
-                .fillMaxSize()
         ) {
-            CustomIcon(item.startIcon)
             TextField(
                 isError = isError,
                 value = text,
@@ -150,14 +239,16 @@ internal fun FilledInput(
                     }
                 },
                 label = {
-                    item.label?.let { it ->
-                        Text(
-                            text = it.text,
-                            modifier = it.modifier,
-                            fontSize = it.fontSize,
-                            fontFamily = it.font,
-                            color = it.textColor
-                        )
+                    if (!item.outsideLabel) {
+                        item.label?.let { it ->
+                            Text(
+                                text = it.text,
+                                modifier = it.modifier,
+                                fontSize = it.fontSize,
+                                fontFamily = it.font,
+                                color = it.textColor
+                            )
+                        }
                     }
                 },
                 placeholder = {
@@ -171,6 +262,8 @@ internal fun FilledInput(
                         )
                     }
                 },
+                leadingIcon = if (item.leadingIcon != null) leadingIconView else null,
+                trailingIcon = if (item.trailingIcon != null) trailingIconView else null,
                 modifier = Modifier,
                 enabled = item.enabled,
                 maxLines = item.maxLines,
@@ -189,23 +282,14 @@ internal fun FilledInput(
                         errorLeadingIconColor = it.getErrorLeadingColor(),
                         disabledLeadingIconColor = it.getDisabledLeadingIconColor(),
                         leadingIconColor = it.getLeadingIconColor(),
-                        disabledIndicatorColor = it.getDisabledIndicatorColor())
+                        trailingIconColor = it.getTrailingIconColor(),
+                        disabledIndicatorColor = it.getDisabledIndicatorColor()
+                    )
                 } ?: TextFieldDefaults.textFieldColors()
             )
-            CustomIcon(item.endIcon)
         }
         if (isError) CustomText(item.errorMessage)
 
-    }
-}
-
-@Composable
-internal fun CustomIcon(customIcon: CustomIcon?) {
-    customIcon?.let {
-        Icon(
-            painterResource(id = it.id),
-            contentDescription = it.contentDesc
-        )
     }
 }
 
@@ -226,7 +310,9 @@ internal fun validate(text: String, regex: String): Boolean = Pattern.matches(re
 
 class CustomIcon(
     val id: Int,
-    val contentDesc: String
+    val contentDesc: String,
+    val onClick: (() -> Unit)? = null,
+    val tint : Color? = null
 )
 
 class CustomText(
@@ -246,37 +332,42 @@ open class TextFieldColors {
         MaterialTheme.colors.onSurface.copy(alpha = BackgroundOpacity)
 
     @Composable
-    fun getFocusedIndicatorColor(): Color =
+    open fun getFocusedIndicatorColor(): Color =
         MaterialTheme.colors.primary.copy(alpha = ContentAlpha.high)
 
     @Composable
-    fun getUnfocusedIndicatorColor(): Color =
+    open fun getUnfocusedIndicatorColor(): Color =
         MaterialTheme.colors.onSurface.copy(alpha = UnfocusedIndicatorLineOpacity)
 
     @Composable
-    fun getDisabledTextColor(textColor: Color): Color = textColor.copy(ContentAlpha.disabled)
+    open fun getDisabledTextColor(textColor: Color): Color = textColor.copy(ContentAlpha.disabled)
 
     @Composable
-    fun getCursorColor(): Color = MaterialTheme.colors.primary
+    open fun getCursorColor(): Color = MaterialTheme.colors.primary
 
     @Composable
-    fun getErrorCursorColor(): Color = MaterialTheme.colors.error
+    open fun getErrorCursorColor(): Color = MaterialTheme.colors.error
 
     @Composable
-    fun getErrorIndicatorColor(): Color = MaterialTheme.colors.error
+    open fun getErrorIndicatorColor(): Color = MaterialTheme.colors.error
 
     @Composable
-    fun getErrorLeadingColor(): Color = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity)
+    open fun getErrorLeadingColor(): Color =
+        MaterialTheme.colors.onSurface.copy(alpha = IconOpacity)
 
     @Composable
-    fun getLeadingIconColor(): Color = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity)
+    open fun getLeadingIconColor(): Color = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity)
 
     @Composable
-    fun getDisabledLeadingIconColor(): Color =
+    open fun getTrailingIconColor(): Color =
+        MaterialTheme.colors.onSurface.copy(alpha = IconOpacity)
+
+    @Composable
+    open fun getDisabledLeadingIconColor(): Color =
         MaterialTheme.colors.onSurface.copy(alpha = IconOpacity).copy(alpha = ContentAlpha.disabled)
 
     @Composable
-    fun getDisabledIndicatorColor(): Color =
+    open fun getDisabledIndicatorColor(): Color =
         MaterialTheme.colors.onSurface.copy(alpha = UnfocusedIndicatorLineOpacity)
             .copy(alpha = ContentAlpha.disabled)
 }
