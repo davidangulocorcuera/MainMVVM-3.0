@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 /**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * © Class created by David Angulo
  * */
 
 @Dao

@@ -10,7 +10,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * © Class created by David Angulo
  * */
 
 

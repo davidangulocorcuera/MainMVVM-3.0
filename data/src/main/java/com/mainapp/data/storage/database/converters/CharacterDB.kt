@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.mainapp.domain.model.Image
 
 /**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * © Class created by David Angulo
  * */
 
 

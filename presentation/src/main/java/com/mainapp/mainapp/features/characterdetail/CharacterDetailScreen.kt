@@ -62,11 +62,9 @@ fun CharacterDetailScreen(
                 }
             }
 
-            CharacterDetailViewModel.CharacterDetailState.ErrorLoadingCharacterState -> CustomButton(
-                text = stringResource(R.string.splash_error_message),
-                onClick = {
-                    viewModel.getCharacterDetail(characterId)
-                })
+            CharacterDetailViewModel.CharacterDetailState.ErrorLoadingCharacterState -> {
+
+            }
 
             CharacterDetailViewModel.CharacterDetailState.Loading -> CustomProgressIndicator(
                 modifier = Modifier.align(

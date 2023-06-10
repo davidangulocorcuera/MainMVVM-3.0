@@ -29,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 }
 
@@ -53,10 +53,10 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     // Room
-    api "androidx.room:room-runtime:2.5.0-beta01"
-    kapt "androidx.room:room-compiler:2.5.0-beta01"
+    api "androidx.room:room-runtime:2.5.0-beta02"
+    kapt "androidx.room:room-compiler:2.5.0-beta02"
     implementation 'androidx.room:room-ktx:2.4.3'
-    implementation "androidx.room:room-rxjava2:2.5.0-beta01"
+    implementation "androidx.room:room-rxjava2:2.5.0-beta02"
 
     // Net
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'

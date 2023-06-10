@@ -13,28 +13,24 @@ import com.mainapp.mainapp.R
 fun CustomButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    text: String
+    backgroundColor: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.colorAccent)),
+    content: @Composable () -> Unit
 ) {
     Button(
         shape = RoundedCornerShape(8.dp),
         onClick = {
             onClick.invoke()
         },
-        elevation =  ButtonDefaults.elevation(
+        elevation = ButtonDefaults.elevation(
             defaultElevation = 4.dp,
             pressedElevation = 6.dp,
         ),
         modifier = modifier
             .padding(start = 30.dp, end = 30.dp)
             .fillMaxWidth()
-            .wrapContentHeight()
-               , colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.colorAccent))
+            .wrapContentHeight(), colors = backgroundColor
 
     ) {
-        Text(
-            modifier = Modifier.padding(8.dp),
-            text = text, color = colorResource(R.color.colorSuperLight)
-        )
+        content()
     }
 }
-

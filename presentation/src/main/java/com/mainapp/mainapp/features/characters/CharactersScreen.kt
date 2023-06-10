@@ -31,6 +31,7 @@ import com.mainapp.mainapp.components.CustomTopAppBar
 import com.mainapp.mainapp.navigation.Constants.CHARACTER_ID
 import com.mainapp.mainapp.navigation.Screen
 import com.mainapp.mainapp.utils.getImageUrl
+import com.mainapp.mainapp.R
 
 
 @Composable
@@ -61,10 +62,8 @@ fun CharactersScreen(
         }
         when (state) {
             is CharactersViewModel.CharactersState.CharactersLoadedState -> offset.value.plus(1)
-            CharactersViewModel.CharactersState.ErrorLoadingCharactersState ->
-                CustomButton(
-                    text = stringResource(R.string.splash_error_message),
-                    onClick = { viewModel.getAllCharacters(offset.value) })
+            CharactersViewModel.CharactersState.ErrorLoadingCharactersState -> {
+            }
 
             CharactersViewModel.CharactersState.Loading -> CustomProgressIndicator(
                 modifier = Modifier.align(

@@ -7,7 +7,7 @@ import com.mainapp.domain.repository.LocalRepository
 import javax.inject.Inject
 
 /**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * © Class created by David Angulo
  * */
 
 class LocalRepositoryImpl @Inject constructor(

@@ -1,7 +1,7 @@
 package com.mainapp.data.cloud
 
 /**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
+ * © Class created by David Angulo
  * */
 
 class ServicesConstants {

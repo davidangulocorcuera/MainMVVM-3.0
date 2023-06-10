@@ -13,6 +13,7 @@ import com.mainapp.mainapp.components.CustomButton
 import com.mainapp.mainapp.components.CustomLoading
 import com.mainapp.mainapp.navigation.Screen
 import kotlinx.coroutines.flow.launchIn
+import com.mainapp.mainapp.R
 import kotlinx.coroutines.flow.onEach
 
 
@@ -44,9 +45,9 @@ fun SplashScreen(
     ) {
 
         when (state) {
-            SplashViewModel.SplashState.ErrorLoadingCharactersState -> CustomButton(
-                text = stringResource(R.string.splash_error_message),
-                onClick = { viewModel.getAllCharacters() })
+            SplashViewModel.SplashState.ErrorLoadingCharactersState -> {
+
+            }
             SplashViewModel.SplashState.Loading -> CustomLoading(anim = R.raw.anim_loading)
         }
     }
