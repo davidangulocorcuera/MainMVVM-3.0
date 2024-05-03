@@ -38,9 +38,7 @@ fun HomeScreen(
                 trailingIcon = CustomIcon(
                     id = R.drawable.ic_arrow_right,
                     contentDesc = "clear",
-                ) {
-                    phone = ""
-                },
+                ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 placeHolder = CustomText(
                     "Introduce tu teléfono",
