@@ -1,8 +1,5 @@
 package com.mainapp.mainapp.utils
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
 
 class Constants {
     companion object {

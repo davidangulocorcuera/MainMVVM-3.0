@@ -14,9 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(

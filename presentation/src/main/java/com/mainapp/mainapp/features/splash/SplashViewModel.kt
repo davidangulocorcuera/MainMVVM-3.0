@@ -17,9 +17,6 @@ import com.mainapp.domain.usecases.local.SaveCharactersInDatabaseUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(

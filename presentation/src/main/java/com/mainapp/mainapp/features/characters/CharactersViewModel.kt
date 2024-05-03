@@ -19,9 +19,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(

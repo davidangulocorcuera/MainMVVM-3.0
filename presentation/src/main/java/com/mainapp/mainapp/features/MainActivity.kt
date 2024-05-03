@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mainapp.mainapp.navigation.CustomNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * © Class created by David Angulo , david.angulocorcuera@plexus.es
- * */
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
